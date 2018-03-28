@@ -104,3 +104,4 @@ volumes:
   www-data:
   mysql-5.7-data:
   postgres-9.4-data:
+  mongo-3.0-data:

@@ -100,17 +100,16 @@ services:
        && tail -f /dev/null"
      ]
 
+  ubuntu:
+    image: "ubuntu:14.04"
+    command: [
+      "bash",
+      "-c",
+      "tail -f /dev/null"
+    ]
+
 volumes:
   www-data:
   mysql-5.7-data:
   postgres-9.4-data:
   mongo-3.0-data:
-
-
-# php-apache sftp codeception browser mailcatcher mysql
-# docker-compose exec codeception bash
-# php /repo/codecept run acceptance EA03ProductCest:product_001 --env=default,firefox,mysql
-
-# php bin/console doctrine:database:create & php bin/console doctrine:schema:create & php bin/console eccube:fixtures:load
-# php bin/console doctrine:schema:create
-# php bin/console eccube:fixtures:load

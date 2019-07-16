@@ -22,83 +22,83 @@ services:
       - "./php-apache/vhosts:/etc/apache2/vhosts"
       - "www-data:/var/www/html"
 
-  postgres:
-     image: postgres:9.4
-     container_name: postgres-9.4
-     environment:
-       - TZ=Asia/Tokyo
-     ports:
-       - "5432:5432"
-     volumes:
-       - postgres-9.4-data:/var/lib/postgresql/data
+#  postgres:
+#     image: postgres:9.4
+#     container_name: postgres-9.4
+#     environment:
+#       - TZ=Asia/Ho_Chi_Minh
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres-9.4-data:/var/lib/postgresql/data
 
   mysql:
      image: mysql:5.7
      container_name: mysql-5.7
      environment:
-       - TZ=Asia/Tokyo
+       - TZ=Asia/Ho_Chi_Minh
        - MYSQL_USER=root
        - MYSQL_ROOT_PASSWORD=root
      ports:
-       - "3306:3306"
+       - "3303:3306"
      volumes:
        - "./mysql/conf.d:/etc/mysql/conf.d"
        - "mysql-5.7-data:/var/lib/mysql"
 
-  mongo:
-     image: "mongo:3.0"
-     container_name: "mongo-3.0"
-     ports:
-       - "27017:27017"
-     volumes:
-       - "mongo-3.0-data:/data/db"
+#  mongo:
+#     image: "mongo:3.0"
+#     container_name: "mongo-3.0"
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - "mongo-3.0-data:/data/db"
 
-  mailcatcher:
-     image: schickling/mailcatcher
-     container_name: mailcatcher
-     ports:
-       - "1080:1080"
-       - "1025:1025"
-     environment:
-       - TZ=Asia/Tokyo
+#  mailcatcher:
+#     image: schickling/mailcatcher
+#     container_name: mailcatcher
+#     ports:
+#       - "1080:1080"
+#       - "1025:1025"
+#     environment:
+#       - TZ=Asia/Ho_Chi_Minh
 
-  browser:
-     image: selenium/standalone-firefox-debug:2.53.1
-     container_name: "browser-firefox"
-     ports:
-       - "5899:5900"
-     dns: "8.8.4.4"
-     environment:
-       - TZ=Asia/Tokyo
-       - no_proxy=localhost
-     volumes:
-       - www-data:/var/www/html
-     links:
-       - "php-apache:eccube.sf"
-     command: [
-       "bash",
-       "-c",
-       "ln -sf /var/www/html/eccube-codeception/sf/tests/_support/_downloads /home/seluser/Downloads
-       && ./opt/bin/entry_point.sh"
-     ]
+#  browser:
+#     image: selenium/standalone-firefox-debug:2.53.1
+#     container_name: "browser-firefox"
+#     ports:
+#       - "5899:5900"
+#     dns: "8.8.4.4"
+#     environment:
+#       - TZ=Asia/Ho_Chi_Minh
+#       - no_proxy=localhost
+#     volumes:
+#       - www-data:/var/www/html
+#     links:
+#       - "php-apache:eccube.sf"
+#     command: [
+#       "bash",
+#       "-c",
+#       "ln -sf /var/www/html/eccube-codeception/sf/tests/_support/_downloads /home/seluser/Downloads
+#       && ./opt/bin/entry_point.sh"
+#     ]
 
-  codeception:
-     image: codeception
-     build: ./codeception
-     container_name: "codeception"
-     volumes:
-       - www-data:/var/www/html
-     environment:
-       - BASE_URL=http://eccube.sf
-     command: [
-       "bash",
-       "-c",
-       "ln -sf /var/www/html/eccube-codeception/sf/codeception.yml /project/codeception.yml
-       && ln -sf /var/www/html/eccube-codeception/sf/tests /project/tests
-       && ln -sf /var/www/html/eccube-codeception/sf/tests/_support/_downloads /project/downloads
-       && ln -sf /var/www/html/eccube-codeception/sf/ff_profile.zip.b64 /root/ff_profile.zip.b64
-       && tail -f /dev/null"
-     ]
+#  codeception:
+#     image: codeception
+#     build: ./codeception
+#     container_name: "codeception"
+#     volumes:
+#       - www-data:/var/www/html
+#     environment:
+#       - BASE_URL=http://eccube.sf
+#     command: [
+#       "bash",
+#       "-c",
+#       "ln -sf /var/www/html/eccube-codeception/sf/codeception.yml /project/codeception.yml
+#       && ln -sf /var/www/html/eccube-codeception/sf/tests /project/tests
+#       && ln -sf /var/www/html/eccube-codeception/sf/tests/_support/_downloads /project/downloads
+#       && ln -sf /var/www/html/eccube-codeception/sf/ff_profile.zip.b64 /root/ff_profile.zip.b64
+#       && tail -f /dev/null"
+#     ]
 
   ubuntu:
     image: "ubuntu:14.04"

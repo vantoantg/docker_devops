@@ -1,4 +1,5 @@
 FROM php:7.1-apache
+RUN apt-get update && apt-get install -y gnupg2
 
 RUN touch /etc/apt/sources.list.d/tideways.list
 RUN echo "deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian main" > /etc/apt/sources.list.d/tideways.list
